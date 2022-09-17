@@ -4,12 +4,12 @@ export default function Meme() {
     const [meme, setMeme] = React.useState({
         topText: "",
         bottomText: "",
-        randomImage: "http://i.imgflip.com/1bij.jpg" 
+        randomImage: "http://i.imgflip.com/1bij.jpg"
     })
     const [allMemes, setAllMemes] = React.useState([])
-    
 
-    
+
+
     React.useEffect(() => {
         async function getMemes() {
             const res = await fetch("https://api.imgflip.com/get_memes")
@@ -18,7 +18,7 @@ export default function Meme() {
         }
         getMemes()
     }, [])
-    
+
     function getMemeImage() {
         const randomNumber = Math.floor(Math.random() * allMemes.length)
         const url = allMemes[randomNumber].url
@@ -27,19 +27,19 @@ export default function Meme() {
             randomImage: url
         }))
     }
-    
+
     function handleChange(event) {
-        const {name, value} = event.target
+        const { name, value } = event.target
         setMeme(prevMeme => ({
             ...prevMeme,
             [name]: value
         }))
     }
-    
+
     return (
         <main>
             <div className="form">
-                <input 
+                <input
                     type="text"
                     placeholder="Top text"
                     className="form--input"
@@ -47,7 +47,7 @@ export default function Meme() {
                     value={meme.topText}
                     onChange={handleChange}
                 />
-                <input 
+                <input
                     type="text"
                     placeholder="Bottom text"
                     className="form--input"
@@ -55,7 +55,7 @@ export default function Meme() {
                     value={meme.bottomText}
                     onChange={handleChange}
                 />
-                <button 
+                <button
                     className="form--button"
                     onClick={getMemeImage}
                 >
